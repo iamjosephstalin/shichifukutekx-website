@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/images/logo-small.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shichifukutekx | Engineering Intelligent Enterprise Experiences</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Unbounded:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Unbounded', 'sans-serif'],
+          },
+          colors: {
+            'obsidian': '#050507', // Deep Void Black
+            'charcoal': '#0F0F11', // Slightly lighter black for cards
+            'ink': '#EAEAEA', // Off-white text
+            'silver': '#888899', // Secondary text
+            'neon-cyan': '#00F0FF',
+            'neon-purple': '#7B2CBF',
+            'glass': 'rgba(255, 255, 255, 0.03)',
+          },
+          cursor: {
+            none: 'none',
+          },
+          backgroundImage: {
+            'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+            'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+          },
+          animation: {
+            'blob': 'blob 10s infinite',
+            'spin-slow': 'spin-3d 15s linear infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'scanner': 'scanner 2s ease-in-out infinite',
+          },
+          keyframes: {
+            blob: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+              '100%': { transform: 'translate(0px, 0px) scale(1)' },
+            },
+            'spin-3d': {
+              '0%': { transform: 'rotateX(0deg) rotateY(0deg)' },
+              '100%': { transform: 'rotateX(360deg) rotateY(360deg)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+            scanner: {
+              '0%': { transform: 'translateX(-100%)' },
+              '100%': { transform: 'translateX(100%)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Hide scrollbar for Chrome/Safari/Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
+    }
+
+    body {
+      background-color: #050507;
+      color: #EAEAEA;
+      cursor: none;
+    }
+
+    .lenis.lenis-smooth {
+      scroll-behavior: auto !important;
+    }
+
+    .lenis.lenis-smooth [data-lenis-prevent] {
+      overscroll-behavior: contain;
+    }
+
+    .lenis.lenis-stopped {
+      overflow: hidden;
+    }
+
+    .lenis.lenis-scrolling iframe {
+      pointer-events: none;
+    }
+
+    /* Utility for text outline */
+    .text-outline {
+      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+      color: transparent;
+      transition: all 0.5s ease;
+      animation: flash 4s infinite ease-in-out;
+    }
+
+    @keyframes flash {
+
+      0%,
+      100% {
+        opacity: 0.3;
+      }
+
+      50% {
+        opacity: 1;
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      }
+    }
+
+
+
+    .clip-path-slant {
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    }
+
+    /* 3D Utilities */
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+
+    .transform-style-3d {
+      transform-style: preserve-3d;
+    }
+
+    .backface-hidden {
+      backface-visibility: hidden;
+    }
+  </style>
+  <meta name="description"
+    content="ShichifukuTekx FZE - Empowering Dubai & UAE enterprises with intelligent AI solutions, strategic consulting, and future-ready automation. Tradition meets Innovation." />
+  <meta name="keywords"
+    content="AI Dubai, Artificial Intelligence UAE, Enterprise AI, Business Automation, Machine Learning, Digital Transformation, ShichifukuTekx" />
+  <meta name="author" content="ShichifukuTekx FZE" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://shichifukutekx.ae/" />
+  <meta property="og:title" content="ShichifukuTekx | Engineering Intelligent Enterprise Experiences" />
+  <meta property="og:description"
+    content="Empowering Dubai & UAE enterprises with intelligent AI solutions. Innovation rooted in tradition. Technology designed for people." />
+  <meta property="og:image" content="https://shichifukutekx.ae/images/og-image.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://shichifukutekx.ae/" />
+  <meta property="twitter:title" content="ShichifukuTekx | Engineering Intelligent Enterprise Experiences" />
+  <meta property="twitter:description" content="Empowering Dubai & UAE enterprises with intelligent AI solutions." />
+  <meta property="twitter:image" content="https://shichifukutekx.ae/images/og-image.png" />
+  <link rel="stylesheet" href="/index.css">
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>
