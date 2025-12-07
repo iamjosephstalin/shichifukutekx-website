@@ -8,8 +8,8 @@ const Footer: React.FC = () => {
       <Section className="!py-0">
         {/* Top row removed as requested */}
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 border-t border-white/5 pt-12">
-          <div className="col-span-1 md:col-span-2 flex flex-col items-start">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/5 pt-12">
+          <div className="col-span-2 flex flex-col items-start pr-8 md:pr-0">
             {/* Logo moved here top of address */}
             <img
               src="/images/ShichifukuTekx-White.webp"
@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
               <p className="text-white/20 pt-4">© 2025 ShichifukuTekx Inc.</p>
             </div>
           </div>
-          <div>
+          <div className="col-span-1">
             <h4 className="font-bold mb-6 text-neon-cyan font-display uppercase tracking-wider text-sm">Sitemap</h4>
             <ul className="space-y-3 text-gray-400 text-sm">
               <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
               <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
-          <div>
+          <div className="col-span-1">
             <h4 className="font-bold mb-6 text-neon-cyan font-display uppercase tracking-wider text-sm">Socials</h4>
             <ul className="space-y-3 text-gray-400 text-sm">
               <li><a href="#" className="hover:text-white transition-colors">LinkedIn</a></li>

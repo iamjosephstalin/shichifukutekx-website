@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Section from '../components/ui/Section';
 import { motion } from 'framer-motion';
+import HeroNetwork from '../components/ui/HeroNetwork';
 
 interface FloatingInputProps {
   label: string;
@@ -71,6 +72,9 @@ const Contact: React.FC = () => {
   return (
     <div className="bg-obsidian min-h-screen pt-32 text-white font-sans relative">
       <div className="absolute inset-0 bg-noise opacity-20 pointer-events-none"></div>
+
+      {/* Particle Network Overlay */}
+      <HeroNetwork />
 
       <Section className="flex flex-col md:flex-row gap-12 lg:gap-24">
         <div className="w-full md:w-1/2">

@@ -10,7 +10,7 @@ const projects: Project[] = [
         title: "Autonomous Trading Core",
         client: "FinCorp Global",
         category: "FinTech",
-        image: "https://images.unsplash.com/photo-1611974765270-ca12586343bb?q=80&w=2080&auto=format&fit=crop",
+        image: "/images/work-trading-core.png",
         year: "2025",
         tags: ["Algorithm", "Python", "Real-time"]
     },
@@ -19,7 +19,7 @@ const projects: Project[] = [
         title: "Diagnostic Vision AI",
         client: "MediTech Systems",
         category: "Healthcare",
-        image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop",
+        image: "/images/work-diagnostic-ai.png",
         year: "2023",
         tags: ["Computer Vision", "TensorFlow", "IoT"]
     },
@@ -28,7 +28,7 @@ const projects: Project[] = [
         title: "Supply Chain Predictor",
         client: "LogisticsOne",
         category: "Logistics",
-        image: "https://images.unsplash.com/photo-1556740758-90de2929450a?q=80&w=2070&auto=format&fit=crop",
+        image: "/images/work-supply-chain.png",
         year: "2023",
         tags: ["Predictive Analytics", "Cloud", "Big Data"]
     },
@@ -37,7 +37,7 @@ const projects: Project[] = [
         title: "Retail Hyper-Personalization",
         client: "RetailX",
         category: "Retail",
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop",
+        image: "/images/work-retail-ai.png",
         year: "2025",
         tags: ["GenAI", "Recommendation Engine", "Web"]
     },
@@ -46,7 +46,7 @@ const projects: Project[] = [
         title: "Smart Grid Energy Optimiser",
         client: "EcoPower",
         category: "IoT",
-        image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2070&auto=format&fit=crop",
+        image: "/images/work-smart-grid.png",
         year: "2022",
         tags: ["IoT", "Edge Computing", "Analytics"]
     },
@@ -55,13 +55,15 @@ const projects: Project[] = [
         title: "Legal Document Synthesis",
         client: "LawFirm LLP",
         category: "NLP",
-        image: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?q=80&w=2076&auto=format&fit=crop",
+        image: "/images/work-legal-ai.png",
         year: "2023",
         tags: ["NLP", "LLM", "Security"]
     }
 ];
 
 const categories = ["All", "FinTech", "Healthcare", "Logistics", "Retail", "IoT", "NLP"];
+
+import HeroNetwork from '../components/ui/HeroNetwork';
 
 const Work: React.FC = () => {
     const [filter, setFilter] = useState("All");
@@ -73,6 +75,9 @@ const Work: React.FC = () => {
     return (
         <div className="bg-obsidian min-h-screen pt-32 pb-20 relative">
             <div className="absolute inset-0 bg-noise opacity-20 pointer-events-none"></div>
+
+            {/* Particle Network Overlay */}
+            <HeroNetwork />
 
             <Section>
                 <div className="mb-20">

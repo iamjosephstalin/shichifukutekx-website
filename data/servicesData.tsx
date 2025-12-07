@@ -11,6 +11,10 @@ export interface ServiceData {
   tags: string[];
   benefits: { title: string; desc: string }[];
   process: { step: string; title: string; desc: string }[];
+  gradient: string;
+  accent: string;
+  border: string;
+  image: string;
 }
 
 export const servicesData: ServiceData[] = [
@@ -32,7 +36,11 @@ export const servicesData: ServiceData[] = [
       { step: "02", title: "Model Selection", desc: "Choosing the right foundation model (Llama 3, Mistral, Falcon) for your specific use case." },
       { step: "03", title: "Fine-Tuning", desc: "Training the model on your proprietary data using LoRA/QLoRA techniques." },
       { step: "04", title: "RAG Deployment", desc: "Connecting the model to your live vector database for real-time context." }
-    ]
+    ],
+    gradient: 'from-neon-cyan/20 via-cyan-900/40 to-obsidian',
+    accent: 'text-neon-cyan',
+    border: 'group-hover:border-neon-cyan/50',
+    image: "/images/service-enterprise-ai.png"
   },
   {
     id: "02",
@@ -51,7 +59,11 @@ export const servicesData: ServiceData[] = [
       { step: "01", title: "Infrastructure as Code", desc: "Defining your entire stack via Terraform or Pulumi for reproducible deployments." },
       { step: "02", title: "Containerization", desc: "Dockerizing applications and establishing CI/CD pipelines." },
       { step: "03", title: "Orchestration", desc: "Deploying EKS/AKS clusters with service mesh for observability." }
-    ]
+    ],
+    gradient: 'from-neon-purple/20 via-purple-900/40 to-obsidian',
+    accent: 'text-neon-purple',
+    border: 'group-hover:border-neon-purple/50',
+    image: "/images/Technology-SaaS-1.webp"
   },
   {
     id: "03",
@@ -70,7 +82,11 @@ export const servicesData: ServiceData[] = [
       { step: "01", title: "Ingestion Strategy", desc: "Setting up Kafka/Kinesis for real-time data capture." },
       { step: "02", title: "Transformation", desc: "dbt (Data Build Tool) modeling to create business-ready datasets." },
       { step: "03", title: "Warehousing", desc: "Optimizing storage in Snowflake or BigQuery for query performance." }
-    ]
+    ],
+    gradient: 'from-emerald-500/20 via-emerald-900/40 to-obsidian',
+    accent: 'text-emerald-400',
+    border: 'group-hover:border-emerald-500/50',
+    image: "/images/Healthcare-Life-Sciences.webp"
   },
   {
     id: "04",
@@ -89,7 +105,11 @@ export const servicesData: ServiceData[] = [
       { step: "01", title: "Workflow Mapping", desc: "Using process mining to identify high-friction manual tasks." },
       { step: "02", title: "Agent Design", desc: "Configuring LangChain agents with specific tools and permissions." },
       { step: "03", title: "Sandboxed Testing", desc: "Running agents in controlled environments to verify decision logic." }
-    ]
+    ],
+    gradient: 'from-orange-500/20 via-orange-900/40 to-obsidian',
+    accent: 'text-orange-400',
+    border: 'group-hover:border-orange-500/50',
+    image: "/images/Manufacturing.webp"
   },
   {
     id: "05",
@@ -108,6 +128,10 @@ export const servicesData: ServiceData[] = [
       { step: "01", title: "User Research", desc: "Shadowing stakeholders to understand their mental models." },
       { step: "02", title: "Prototyping", desc: "High-fidelity Figma prototypes with full interaction flows." },
       { step: "03", title: "Creative Dev", desc: "Implementing micro-interactions and shaders in React." }
-    ]
+    ],
+    gradient: 'from-indigo-500/20 via-indigo-900/40 to-obsidian',
+    accent: 'text-indigo-400',
+    border: 'group-hover:border-indigo-500/50',
+    image: "/images/Financial-Services-main.webp"
   }
 ];
