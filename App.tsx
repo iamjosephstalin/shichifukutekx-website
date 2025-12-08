@@ -13,6 +13,8 @@ import Work from './pages/Work';
 import About from './pages/About';
 import ServiceDetail from './pages/ServiceDetail';
 
+import CookieConsent from './components/ui/CookieConsent';
+
 // ScrollToTop component to reset scroll on route change
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -22,7 +24,7 @@ const ScrollToTop = () => {
   return null;
 };
 
-const Layout: React.FC<{children: React.ReactNode}> = ({ children }) => {
+const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -57,8 +59,9 @@ const Layout: React.FC<{children: React.ReactNode}> = ({ children }) => {
       {/* Background glow effect */}
       <div className="fixed top-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-neon-purple/5 blur-[120px] pointer-events-none z-0" />
       <div className="fixed bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-neon-cyan/5 blur-[120px] pointer-events-none z-0" />
-      
+
       <Cursor />
+      <CookieConsent />
       <Navbar />
       <main className="relative z-10">
         {children}

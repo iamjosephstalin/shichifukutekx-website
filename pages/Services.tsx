@@ -6,6 +6,7 @@ import { ArrowUpRight, Plus, ArrowRight } from 'lucide-react';
 import { servicesData, ServiceData } from '../data/servicesData';
 import Magnetic from '../components/ui/Magnetic';
 import HeroNetwork from '../components/ui/HeroNetwork';
+import TechMarquee from '../components/ui/TechMarquee';
 
 const Services: React.FC = () => {
     return (
@@ -69,6 +70,9 @@ const Services: React.FC = () => {
                     </div>
                 </div>
             </Section>
+
+            {/* Technology Stack Marquee */}
+            <TechMarquee />
         </div>
     );
 };

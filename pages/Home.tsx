@@ -1,17 +1,17 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Section from '../components/ui/Section';
 import HeroNetwork from '../components/ui/HeroNetwork';
+import HeroVisual from '../components/ui/HeroVisual';
 import Magnetic from '../components/ui/Magnetic';
 import { ArrowUpRight, Cpu, Globe, Zap, ArrowRight, Activity, ArrowDown, TrendingUp, ShoppingBag, Factory, Truck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ScrambleText from '../components/ui/ScrambleText';
 
 gsap.registerPlugin(ScrollTrigger);
-
-// ... (existing imports)
+import ContactForm from '../components/ui/ContactForm';
 
 const services = [
     {
@@ -134,7 +134,25 @@ const Home: React.FC = () => {
     const triggerRef = useRef<HTMLDivElement>(null);
     const sliderRef = useRef<HTMLDivElement>(null);
     const heroRef = useRef<HTMLDivElement>(null);
+    const videoRef = useRef<HTMLVideoElement>(null);
     const [activeService, setActiveService] = useState(1);
+
+    // Scroll Reveal Refs
+    const ctaRef = useRef<HTMLDivElement>(null);
+    const circleRef = useRef<HTMLDivElement>(null);
+
+    const circleContentRef = useRef<HTMLDivElement>(null);
+    const formContainerRef = useRef<HTMLDivElement>(null);
+    const buttonTextRef = useRef<HTMLDivElement>(null);
+    const question1Ref = useRef<HTMLDivElement>(null);
+    const question2Ref = useRef<HTMLDivElement>(null);
+
+    // Set video playback rate to slow motion
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.playbackRate = 0.5;
+        }
+    }, []);
 
     // Parallax Hero Text
     const { scrollY } = useScroll();
@@ -191,6 +209,53 @@ const Home: React.FC = () => {
                 ease: "power4.out"
             });
 
+            // Contact Reveal Animation
+            if (ctaRef.current && circleRef.current) {
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: ctaRef.current,
+                        start: "top top",
+                        end: "+=4000", // Increased scroll distance for multi-step reveal
+                        pin: true,
+                        scrub: 1,
+                    }
+                });
+
+                // PHASE 1: Morph from Circle to Rectangle
+                // --- STAGE 1: Morph to 55% Rectangle & Reveal Q1 ---
+                // --- CONTINUOUS GROWTH TIMELINE ---
+                // 1. One single continuous tween for the circle expansion (no stops)
+                tl.to(circleRef.current, {
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "0px",
+                    borderWidth: "0px",
+                    top: "50%",
+                    duration: 10,
+                    ease: "power1.inOut" // Smooth start and end, continuous middle
+                })
+
+                    // 2. Overlay Content Animations at specific times
+                    // Initial Fade Out (0s - 1s)
+                    .to(circleContentRef.current, { opacity: 0, scale: 0.8, duration: 1 }, 0)
+                    .to(buttonTextRef.current, { autoAlpha: 0, duration: 0.5 }, 0)
+
+                    // Q1: "Boost Productivity" (Appear ~1.5s, Hide ~3.5s) - While circle is ~20-40%
+                    .to(question1Ref.current, { autoAlpha: 1, scale: 1, duration: 1, ease: "power2.out" }, 1.5)
+                    .to(question1Ref.current, { autoAlpha: 0, scale: 0.95, duration: 1, ease: "power2.in" }, 3.5)
+
+                    // Q2: "AI Ready" (Appear ~4.5s, Hide ~6.5s) - While circle is ~50-70%
+                    .to(question2Ref.current, { autoAlpha: 1, scale: 1, duration: 1, ease: "power2.out" }, 4.5)
+                    .to(question2Ref.current, { autoAlpha: 0, scale: 0.95, duration: 1, ease: "power2.in" }, 6.5)
+
+                    // Form: Reveal (Appear ~8s to End) - While circle finishes
+                    .to(formContainerRef.current, {
+                        opacity: 1,
+                        pointerEvents: "auto",
+                        duration: 2
+                    }, 8);
+            }
+
         }, triggerRef);
 
         return () => ctx.revert();
@@ -207,18 +272,20 @@ const Home: React.FC = () => {
 
                 {/* === DUBAI + AI BACKGROUND === */}
                 <motion.div style={{ y: yBg, scale: 1.1 }} className="absolute inset-0 z-0">
-                    <img
-                        src="/images/dubai-ai-hero.png"
-                        alt="Dubai AI Future"
-                        className="w-full h-full object-cover object-[center_30%] opacity-60"
-                    />
-                    {/* Dark Gradient Overlay for Text Readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/80 to-transparent" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-obsidian/90 via-transparent to-obsidian/90" />
+                    <video
+                        ref={videoRef}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover opacity-60"
+                    // poster="/images/dubai-ai-hero.png" // Removed fallback
+                    >
+                        <source src="/videos/dubai-night.mp4" type="video/mp4" />
+                    </video>
+                    {/* Dark Overlay for Text Readability - 50% Black */}
+                    <div className="absolute inset-0 bg-black/50" />
                 </motion.div>
-
-                {/* === VECTOR NETWORK OVERLAY === */}
-                <HeroNetwork />
 
                 {/* === TOP META DATA (MOVED TO TOP) === */}
                 <div className="hidden md:flex absolute top-0 left-0 right-0 z-30 px-6 py-8 w-full max-w-[1800px] mx-auto justify-between items-start">
@@ -235,104 +302,61 @@ const Home: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Main Content (Centered & Blurred on Scroll) */}
-                <div className="z-10 relative px-4 w-full max-w-[1800px] mx-auto h-full flex flex-col justify-center">
-                    <motion.div style={{ y: yText, opacity, filter: `blur(${textBlur})` }} className="flex flex-col justify-center h-full pt-20">
+                {/* Main Content (Centered/Left - Removed 3D Object) */}
+                <div className="z-10 relative px-6 md:px-12 w-full max-w-[1800px] mx-auto h-full flex flex-col justify-center items-start">
+                    {/* Typography */}
+                    <motion.div style={{ y: yText, opacity, filter: `blur(${textBlur})` }} className="flex flex-col justify-center h-full pt-20 max-w-4xl">
 
-                        {/* Hero Headline */}
-                        {/* Hero Headline & Subtext */}
-                        {/* Animated Headline Sequence */}
-                        <div className="max-w-6xl relative z-20">
+                        <div className="relative z-20 text-left">
 
-                            {/* Step 1: Fade In */}
-                            <motion.p
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
+                            {/* H1 Headline */}
+                            <motion.h1
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-                                className="text-neon-purple text-base md:text-xl font-mono tracking-widest uppercase mb-2"
+                                className="text-5xl md:text-7xl font-display font-bold text-white leading-tight mb-6"
                             >
-                                Empower Your Business.
-                            </motion.p>
-
-                            {/* Step 2: Slide Up */}
-                            <motion.h3
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ duration: 0.8, delay: 1.5, ease: "easeOut" }}
-                                className="text-xl md:text-4xl font-light text-white/90 mb-6 md:mb-8"
-                            >
-                                Accelerate with <span className="text-neon-cyan font-semibold">Intelligence.</span>
-                            </motion.h3>
-
-                            {/* Step 3: Reveal Title */}
-                            <h1 className="text-[8.5vw] xl:text-[6.5vw] leading-[1.1] md:leading-[0.85] font-display font-bold tracking-tighter text-white uppercase mix-blend-normal mb-6 md:mb-8">
-                                <span className="block overflow-hidden">
-                                    <motion.span
-                                        initial={{ y: "100%" }}
-                                        animate={{ y: 0 }}
-                                        transition={{ duration: 1.2, delay: 2.2, ease: [0.22, 1, 0.36, 1] }}
-                                        className="block flex flex-col md:flex-row gap-y-0 md:gap-x-8 items-start"
-                                    >
-                                        <ScrambleText
-                                            text="ShichifukuTekx"
-                                            delay={2.5}
-                                            duration={1500}
-                                            className="inline-block whitespace-nowrap"
-                                        />
-                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-purple inline-block">
-                                            <ScrambleText
-                                                text="FZE"
-                                                delay={3.0}
-                                                duration={1000}
-                                            />
-                                        </span>
-                                    </motion.span>
+                                Accelerate with <br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-purple">
+                                    Intelligence.
                                 </span>
-                                <span className="block overflow-hidden mt-2 md:mt-2">
-                                    <motion.span
-                                        initial={{ y: "100%" }}
-                                        animate={{ y: 0 }}
-                                        transition={{ duration: 1.2, delay: 2.4, ease: [0.22, 1, 0.36, 1] }}
-                                        className="block text-lg md:text-3xl font-sans tracking-normal normal-case text-silver font-light"
-                                    >
-                                        AI for Dubai’s Most Ambitious Enterprises
-                                    </motion.span>
-                                </span>
-                            </h1>
+                            </motion.h1>
 
-                            {/* Animated Subtext */}
-                            <motion.div
-                                initial={{ opacity: 0, filter: "blur(10px)" }}
-                                animate={{ opacity: 1, filter: "blur(0px)" }}
-                                transition={{ duration: 1.5, delay: 3.2, ease: "easeOut" }}
-                                className="max-w-3xl mb-8 md:mb-12 border-l-2 border-neon-cyan pl-4 md:pl-6"
+                            {/* H2 Subheadline */}
+                            <motion.h2
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
+                                className="text-xl md:text-3xl font-light text-silver mb-10 max-w-2xl"
                             >
-                                <p className="text-base md:text-lg text-silver/80 leading-relaxed">
-                                    Precision-engineered AI solutions built to optimize, automate, and revolutionize operations.
-                                    Human-centered design meets deep technical expertise to create intelligence that truly performs.
-                                </p>
-                            </motion.div>
+                                The Premier AI Partner for the GCC Region.
+                            </motion.h2>
 
                             {/* CTA Button */}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8, delay: 3.5 }}
+                                transition={{ duration: 0.8, delay: 1.1 }}
                                 className="flex justify-start"
                             >
                                 <Magnetic>
-                                    <button className="group relative px-8 py-4 md:px-10 md:py-5 bg-obsidian border border-white/10 rounded-full overflow-hidden transition-all duration-300 hover:border-neon-cyan hover:shadow-[0_0_30px_rgba(0,240,255,0.2)]">
-                                        <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-neon-cyan/20 to-neon-purple/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+                                    <button className="group relative px-8 py-4 md:px-10 md:py-5 rounded-full overflow-hidden transition-all duration-300 shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:shadow-[0_0_40px_rgba(0,240,255,0.5)]">
+
+                                        {/* Gradient Background */}
+                                        <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-neon-cyan via-blue-600 to-neon-purple opacity-90 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                                        {/* Shine Effect */}
+                                        <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-scanner pointer-events-none"></div>
+
                                         <div className="relative flex items-center gap-4">
-                                            <span className="text-sm md:text-base font-bold uppercase tracking-widest text-white group-hover:text-neon-cyan transition-colors">Start Your AI Transformation</span>
-                                            <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-neon-cyan group-hover:text-black transition-colors">
+                                            <span className="text-sm md:text-base font-bold uppercase tracking-widest text-white transition-colors">Start Your AI Transformation</span>
+                                            <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white group-hover:bg-white group-hover:text-neon-purple transition-all duration-300">
                                                 <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform duration-300" />
                                             </div>
                                         </div>
                                     </button>
                                 </Magnetic>
                             </motion.div>
-
                         </div>
                     </motion.div>
                 </div>
@@ -386,7 +410,7 @@ const Home: React.FC = () => {
             </div>
 
             {/* SERVICES - "KINETIC MONOLITHS" DESIGN */}
-            <Section className="relative z-20 bg-obsidian py-32 reveal-section">
+            <Section className="relative z-20 bg-obsidian py-20 md:py-24 lg:py-32 reveal-section">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-24">
                     <div className="max-w-3xl">
                         <h4 className="text-neon-cyan text-sm font-mono tracking-widest uppercase mb-6">Core Industries</h4>
@@ -521,28 +545,30 @@ const Home: React.FC = () => {
                 <div ref={sliderRef} className="flex h-full w-fit">
 
                     {/* PANEL 1: Title Card */}
-                    <div className="w-screen h-screen flex-shrink-0 flex items-center justify-center bg-obsidian border-r border-white/5 relative p-6 md:p-24 panel-item">
-                        <div className="max-w-4xl w-full">
-                            <span className="text-neon-cyan font-mono text-xs md:text-sm tracking-widest mb-4 block">SOLUTIONS</span>
-                            <h2 className="text-5xl md:text-[10vw] font-display font-bold mb-6 md:mb-8 text-white leading-[0.9]">
-                                AI<br />
-                                <motion.span
-                                    className="text-outline"
-                                    whileInView={{
-                                        WebkitTextStroke: ["1px rgba(255,255,255,0.2)", "1px #FFFFFF", "1px #00F0FF"],
-                                        color: ["transparent", "rgba(255,255,255,0.8)", "rgba(0, 240, 255, 0.1)"],
-                                        textShadow: ["none", "0 0 20px rgba(255,255,255,0.5)", "0 0 10px rgba(0,240,255,0.3)"]
-                                    }}
-                                    viewport={{ once: false, amount: 0.5 }}
-                                    transition={{ duration: 0.8, times: [0, 0.2, 1], ease: "circOut" }}
-                                >Services</motion.span>
-                            </h2>
-                            <p className="text-lg md:text-2xl text-silver max-w-xl leading-relaxed font-light">
-                                End-to-end artificial intelligence capabilities designed to modernize enterprises and drive growth across Dubai and the UAE.
-                            </p>
-                            <div className="mt-8 md:mt-12 flex items-center gap-4 text-neon-cyan">
-                                <span className="text-xs md:text-sm font-mono tracking-widest">DISCOVER OFFERINGS</span>
-                                <ArrowRight className="animate-pulse" />
+                    <div className="w-screen h-screen flex-shrink-0 flex items-start pt-24 md:pt-32 lg:items-center lg:pt-0 bg-obsidian border-r border-white/5 relative panel-item">
+                        <div className="w-full max-w-[1800px] mx-auto px-6 md:px-12">
+                            <div className="max-w-4xl w-full">
+                                <span className="text-neon-cyan font-mono text-xs md:text-sm tracking-widest mb-4 block">SOLUTIONS</span>
+                                <h2 className="text-5xl md:text-[10vw] font-display font-bold mb-6 md:mb-8 text-white leading-[0.9]">
+                                    AI<br />
+                                    <motion.span
+                                        className="text-outline"
+                                        whileInView={{
+                                            WebkitTextStroke: ["1px rgba(255,255,255,0.2)", "1px #FFFFFF", "1px #00F0FF"],
+                                            color: ["transparent", "rgba(255,255,255,0.8)", "rgba(0, 240, 255, 0.1)"],
+                                            textShadow: ["none", "0 0 20px rgba(255,255,255,0.5)", "0 0 10px rgba(0,240,255,0.3)"]
+                                        }}
+                                        viewport={{ once: false, amount: 0.5 }}
+                                        transition={{ duration: 0.8, times: [0, 0.2, 1], ease: "circOut" }}
+                                    >Services</motion.span>
+                                </h2>
+                                <p className="text-lg md:text-2xl text-silver max-w-xl leading-relaxed font-light">
+                                    End-to-end artificial intelligence capabilities designed to modernize enterprises and drive growth across Dubai and the UAE.
+                                </p>
+                                <div className="mt-8 md:mt-12 flex items-center gap-4 text-neon-cyan">
+                                    <span className="text-xs md:text-sm font-mono tracking-widest">DISCOVER OFFERINGS</span>
+                                    <ArrowRight className="animate-pulse" />
+                                </div>
                             </div>
                         </div>
                         <div className="absolute inset-0 z-[-1] opacity-20 bg-noise"></div>
@@ -827,47 +853,90 @@ const Home: React.FC = () => {
                 </motion.div>
             </Section>
 
-            {/* CTA SECTION */}
-            <Section className="bg-obsidian text-center min-h-[80vh] flex flex-col items-center justify-center relative overflow-hidden z-20">
+            {/* CTA SECTION - SCROLL REVEAL */}
+            <div ref={ctaRef} className="bg-obsidian min-h-screen text-center flex flex-col items-center justify-start pt-24 md:justify-center md:pt-0 relative overflow-hidden z-20">
+                {/* Background Glow */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-neon-purple/10 rounded-full blur-[120px]" />
                 </div>
 
-                <h2 className="text-6xl md:text-9xl font-display font-bold z-10 mb-16 text-white relative leading-[0.85]">
-                    Ready to <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-purple">Evolve?</span>
-                </h2>
+                <div ref={circleContentRef} className="relative z-10 flex flex-col items-center">
+                    <h2 className="text-6xl md:text-9xl font-display font-bold mb-16 text-white relative leading-[0.85]">
+                        Ready to <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-purple">Evolve?</span>
+                    </h2>
+                </div>
 
-                <Link to="/contact">
-                    <Magnetic>
-                        <div className="w-56 h-56 md:w-72 md:h-72 rounded-full relative flex items-center justify-center group z-10 interactive cursor-pointer">
-                            {/* Electric Border Ring */}
-                            <div className="absolute inset-0 rounded-full border border-white/20 group-hover:border-transparent transition-colors duration-300" />
+                {/* The Morphing Container */}
+                <div
+                    ref={circleRef}
+                    className="absolute left-1/2 top-[65%] -translate-x-1/2 -translate-y-1/2 w-56 h-56 md:w-72 md:h-72 rounded-full bg-gradient-to-br from-[#0a0a10] to-[#151520] border border-white/20 z-20 flex items-center justify-center overflow-hidden shadow-2xl"
+                >
+                    {/* Button Text Content (Initially Visible) */}
+                    <div
+                        ref={buttonTextRef}
+                        className="absolute inset-0 flex items-center justify-center pointer-events-none group"
+                    >
+                        <div className="absolute inset-[-4px] rounded-full bg-gradient-to-r from-neon-cyan via-transparent to-neon-purple opacity-50 blur-md animate-spin-slow group-hover:opacity-100" />
+                        <div className="absolute inset-0 bg-obsidian/50 backdrop-blur-sm" />
 
-                            {/* Spinning Electric Gradient - Visible on Hover */}
-                            <motion.div
-                                className="absolute inset-[-4px] rounded-full bg-gradient-to-r from-neon-cyan via-transparent to-neon-purple opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-300"
-                                animate={{ rotate: 360 }}
-                                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                            />
+                        <span className="relative z-10 text-2xl font-display font-bold text-white group-hover:text-neon-cyan transition-colors">
+                            Get in Touch
+                        </span>
+                    </div>
 
-                            {/* Shockwave Ripple */}
-                            <motion.div
-                                className="absolute inset-0 rounded-full border-2 border-neon-cyan opacity-0"
-                                whileHover={{ scale: [1, 1.5], opacity: [0.5, 0] }}
-                                transition={{ duration: 1, repeat: Infinity }}
-                            />
+                    {/* === QUESTION PANEL 1: PRODUCTIVITY === */}
+                    <div
+                        ref={question1Ref}
+                        className="absolute inset-0 z-30 flex items-center justify-center opacity-0 invisible scale-95 pointer-events-none"
+                    >
+                        <div className="text-center max-w-4xl px-6">
+                            <h3 className="text-3xl md:text-5xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-silver mb-6 leading-tight">
+                                Ready to boost your <br />
+                                <span className="text-neon-cyan">Productivity?</span>
+                            </h3>
+                        </div>
+                    </div>
 
-                            {/* Core Content */}
-                            <div className="absolute inset-[2px] rounded-full bg-obsidian/80 backdrop-blur-md flex items-center justify-center z-20 border border-white/10 group-hover:border-neon-cyan/50 transition-colors">
-                                <span className="text-2xl font-display font-bold text-white group-hover:text-neon-cyan group-hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.8)] transition-all duration-300">
-                                    Get in Touch
-                                </span>
+                    {/* === QUESTION PANEL 2: AI READY === */}
+                    <div
+                        ref={question2Ref}
+                        className="absolute inset-0 z-30 flex items-center justify-center opacity-0 invisible scale-95 pointer-events-none"
+                    >
+                        <div className="text-center max-w-4xl px-6">
+                            <h3 className="text-3xl md:text-5xl font-display font-bold text-white mb-6 leading-tight">
+                                Are you <br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-purple to-neon-pink">AI Ready?</span>
+                            </h3>
+                        </div>
+                    </div>
+
+                    {/* Contact Form (Revealed Inside) */}
+                    <div
+                        ref={formContainerRef}
+                        className="w-full h-full opacity-0 flex items-start justify-center p-4 md:p-12 pt-28 md:pt-32 relative z-30 pointer-events-none overflow-y-auto no-scrollbar"
+                    >
+                        <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-start mt-0 mb-10 md:mb-0">
+                            <div className="text-left text-center lg:text-left block lg:sticky lg:top-40">
+                                <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">Let's Build the Future.</h3>
+                                <p className="text-silver text-xl font-light leading-relaxed mb-8">
+                                    From strategic AI consulting to full-scale autonomous systems, we are ready to engineer your vision.
+                                </p>
+                                <div className="space-y-4">
+                                    <div className="flex items-center gap-4 text-neon-cyan">
+                                        <div className="w-12 h-[1px] bg-neon-cyan" />
+                                        <span className="font-mono text-sm tracking-widest uppercase">Dubai / Riyadh / Doha</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="bg-white/5 backdrop-blur-xl p-6 md:p-8 rounded-2xl border border-white/10 shadow-2xl w-full max-w-xl mx-auto lg:max-w-none mt-4 md:mt-0">
+                                <ContactForm />
                             </div>
                         </div>
-                    </Magnetic>
-                </Link>
-            </Section>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
