@@ -51,7 +51,7 @@ const Navbar: React.FC = () => {
           </div>
 
           <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="p-1 interactive text-white">
+            <button onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu" className="p-1 interactive text-white">
               {isOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>

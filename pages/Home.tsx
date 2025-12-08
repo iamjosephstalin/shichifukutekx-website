@@ -294,7 +294,7 @@ const Home: React.FC = () => {
                         className="w-full h-full object-cover opacity-60"
                     // poster="/images/dubai-ai-hero.png" // Removed fallback
                     >
-                        <source src="/videos/dubai-night.mp4" type="video/mp4" />
+                        <source src="/videos/dubai-night.webm" type="video/webm" />
                     </video>
                     {/* Dark Overlay for Text Readability - 50% Black */}
                     <div className="absolute inset-0 bg-black/50" />

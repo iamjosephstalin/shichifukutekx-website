@@ -39,24 +39,24 @@ const Footer: React.FC = () => {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative w-11 h-11 rounded-lg bg-obsidian border border-white/10 flex items-center justify-center hover:border-neon-cyan transition-all duration-300 hover:shadow-[0_0_25px_rgba(0,243,255,0.5)] hover:bg-neon-cyan/5"
-              >
+                aria-label="LinkedIn"
+                className="group relative w-11 h-11 rounded-lg bg-obsidian border border-white/10 flex items-center justify-center hover:border-neon-cyan transition-all duration-300 hover:shadow-[0_0_25px_rgba(0,243,255,0.5)] hover:bg-neon-cyan/5">
                 <Linkedin className="w-5 h-5 text-white/60 group-hover:text-neon-cyan transition-colors" />
               </a>
               <a
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative w-11 h-11 rounded-lg bg-obsidian border border-white/10 flex items-center justify-center hover:border-neon-purple transition-all duration-300 hover:shadow-[0_0_25px_rgba(188,19,254,0.5)] hover:bg-neon-purple/5"
-              >
+                aria-label="Twitter"
+                className="group relative w-11 h-11 rounded-lg bg-obsidian border border-white/10 flex items-center justify-center hover:border-neon-purple transition-all duration-300 hover:shadow-[0_0_25px_rgba(188,19,254,0.5)] hover:bg-neon-purple/5">
                 <Twitter className="w-5 h-5 text-white/60 group-hover:text-neon-purple transition-colors" />
               </a>
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative w-11 h-11 rounded-lg bg-obsidian border border-white/10 flex items-center justify-center hover:border-neon-cyan transition-all duration-300 hover:shadow-[0_0_25px_rgba(0,243,255,0.5)] hover:bg-neon-cyan/5"
-              >
+                aria-label="Instagram"
+                className="group relative w-11 h-11 rounded-lg bg-obsidian border border-white/10 flex items-center justify-center hover:border-neon-cyan transition-all duration-300 hover:shadow-[0_0_25px_rgba(0,243,255,0.5)] hover:bg-neon-cyan/5">
                 <Instagram className="w-5 h-5 text-white/60 group-hover:text-neon-cyan transition-colors" />
               </a>
             </div>

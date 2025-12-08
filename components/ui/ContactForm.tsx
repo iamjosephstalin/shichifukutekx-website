@@ -41,6 +41,7 @@ const FloatingInput: React.FC<FloatingInputProps> = ({ label, name, register, er
         <div className="relative group mb-2 md:mb-4">
             <div className={`relative bg-white/5 border rounded-lg overflow-hidden transition-colors duration-300 ${error ? 'border-red-500/50 bg-red-500/5' : isFocused ? 'border-neon-cyan/50 bg-white/10' : 'border-white/10 hover:border-white/20'}`}>
                 <motion.label
+                    htmlFor={name}
                     initial={false}
                     animate={{
                         y: isActive ? -10 : 0,
@@ -56,6 +57,7 @@ const FloatingInput: React.FC<FloatingInputProps> = ({ label, name, register, er
 
                 {isTextArea ? (
                     <textarea
+                        id={name}
                         {...register(name, {
                             onBlur: handleBlur,
                             onChange: (e) => setHasValue(e.target.value.length > 0)
@@ -66,6 +68,7 @@ const FloatingInput: React.FC<FloatingInputProps> = ({ label, name, register, er
                     />
                 ) : (
                     <input
+                        id={name}
                         {...register(name, {
                             onBlur: handleBlur,
                             onChange: (e) => setHasValue(e.target.value.length > 0)
@@ -185,6 +188,7 @@ const ContactForm: React.FC = () => {
                         <button
                             key={option}
                             type="button"
+                            aria-pressed={selectedInterests.includes(option)}
                             onClick={() => toggleInterest(option)}
                             className={`px-2 py-1 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs transition-all border ${selectedInterests.includes(option)
                                 ? 'bg-neon-cyan/10 border-neon-cyan text-neon-cyan shadow-[0_0_10px_rgba(0,240,255,0.2)]'
@@ -208,6 +212,7 @@ const ContactForm: React.FC = () => {
                         <button
                             key={option}
                             type="button"
+                            aria-pressed={selectedBudget === option}
                             onClick={() => setSelectedBudget(option)}
                             className={`px-2 py-1.5 md:px-3 md:py-2 rounded-lg text-[10px] md:text-xs transition-all border text-center ${selectedBudget === option
                                 ? 'bg-neon-purple/10 border-neon-purple text-neon-purple shadow-[0_0_10px_rgba(180,0,255,0.2)]'
