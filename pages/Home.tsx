@@ -253,7 +253,8 @@ const Home: React.FC = () => {
                         opacity: 1,
                         pointerEvents: "auto",
                         duration: 2
-                    }, 8);
+                    }, 8)
+                    .set(circleRef.current, { overflow: "visible" }, ">"); // Ensure overflow is visible after animation
             }
 
         }, triggerRef);
@@ -914,7 +915,7 @@ const Home: React.FC = () => {
                     {/* Contact Form (Revealed Inside) */}
                     <div
                         ref={formContainerRef}
-                        className="w-full h-full opacity-0 flex items-start justify-center p-4 md:p-12 pt-28 md:pt-32 relative z-30 pointer-events-none overflow-y-auto no-scrollbar"
+                        className="w-full h-full opacity-0 flex items-start justify-center p-4 md:p-12 pt-28 md:pt-32 relative z-30 pointer-events-none overflow-visible"
                     >
                         <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-start mt-0 mb-10 md:mb-0">
                             <div className="text-left text-center lg:text-left block lg:sticky lg:top-40">

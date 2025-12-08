@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 import gsap from 'gsap';
@@ -6,14 +6,22 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Cursor from './components/layout/Cursor';
-import Home from './pages/Home';
-import Services from './pages/Services';
-import Contact from './pages/Contact';
-import Work from './pages/Work';
-import About from './pages/About';
-import ServiceDetail from './pages/ServiceDetail';
-
 import CookieConsent from './components/ui/CookieConsent';
+
+// Lazy load page components for code splitting
+const Home = lazy(() => import('./pages/Home'));
+const Services = lazy(() => import('./pages/Services'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Work = lazy(() => import('./pages/Work'));
+const About = lazy(() => import('./pages/About'));
+const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
+
+// Loading component
+const LoadingFallback = () => (
+  <div className="min-h-screen flex items-center justify-center bg-obsidian">
+    <div className="text-neon-cyan text-xl font-display">Loading...</div>
+  </div>
+);
 
 // ScrollToTop component to reset scroll on route change
 const ScrollToTop = () => {
@@ -76,14 +84,16 @@ const App: React.FC = () => {
     <Router>
       <ScrollToTop />
       <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/services/:slug" element={<ServiceDetail />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/work" element={<Work />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
+        <Suspense fallback={<LoadingFallback />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/services/:slug" element={<ServiceDetail />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/work" element={<Work />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </Suspense>
       </Layout>
     </Router>
   );

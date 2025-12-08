@@ -100,30 +100,42 @@ const FooterArrowGrid: React.FC<FooterArrowGridProps> = ({ isHoveringTop = false
                 <div
                     key={i}
                     ref={(el) => (arrowsRef.current[i] = el)}
-                    className={`w-8 h-8 flex items-center justify-center transition-all ease-out will-change-transform ${isHoveringTop ? 'duration-500' : 'duration-75'}`}
+                    className={`w-10 h-10 flex items-center justify-center transition-all ease-out will-change-transform ${isHoveringTop ? 'duration-500' : 'duration-75'}`}
                 >
-                    {/* Gradient Arrow SVG */}
+                    {/* Gradient Arrow SVG - 3D Stealth Shape */}
                     <svg
                         viewBox="0 0 24 24"
                         fill="none"
-                        strokeWidth="3.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="w-full h-full transition-all duration-300"
+                        className="w-full h-full transition-all duration-300 drop-shadow-md"
                     >
                         <defs>
-                            <linearGradient id={`arrow-gradient-default-${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                            <linearGradient id={`arrow-gradient-default-${i}`} x1="50%" y1="0%" x2="50%" y2="100%">
                                 <stop offset="0%" stopColor="#00f3ff" /> {/* Neon Cyan */}
                                 <stop offset="100%" stopColor="#0066ff" /> {/* Deep Blue */}
                             </linearGradient>
-                            <linearGradient id={`arrow-gradient-active-${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                            <linearGradient id={`arrow-gradient-active-${i}`} x1="50%" y1="0%" x2="50%" y2="100%">
                                 <stop offset="0%" stopColor="#bc13fe" /> {/* Neon Purple */}
                                 <stop offset="100%" stopColor="#ff00cc" /> {/* Neon Pink */}
                             </linearGradient>
+                            {/* Shadow/Side Gradient for depth */}
+                            <linearGradient id={`arrow-gradient-depth-${i}`} x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stopColor="rgba(0,0,0,0.3)" />
+                                <stop offset="50%" stopColor="rgba(0,0,0,0)" />
+                                <stop offset="100%" stopColor="rgba(0,0,0,0.3)" />
+                            </linearGradient>
                         </defs>
+
+                        {/* Main Body */}
                         <path
-                            d="M12 19V5 M5 12l7-7 7 7"
-                            stroke={`url(#${isHoveringTop ? `arrow-gradient-active-${i}` : `arrow-gradient-default-${i}`})`}
+                            d="M12 2L2 22L12 18L22 22L12 2Z"
+                            fill={`url(#${isHoveringTop ? `arrow-gradient-active-${i}` : `arrow-gradient-default-${i}`})`}
+                        />
+
+                        {/* Center Spine Shadow for 3D effect */}
+                        <path
+                            d="M12 2L12 18L22 22L12 2Z"
+                            fill="black"
+                            fillOpacity="0.2"
                         />
                     </svg>
                 </div>
