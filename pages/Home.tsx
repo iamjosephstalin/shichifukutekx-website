@@ -293,9 +293,9 @@ const Home: React.FC = () => {
                         playsInline
                         preload="auto"
                         className="w-full h-full object-cover opacity-60"
-                        poster="/images/poster.jpg"
+                        poster="/images/poster.webp"
                     >
-                        <source src="https://d88c8a34.static-assets-5r0.pages.dev/dubai-night.webm" type="video/webm" />
+                        <source src="/videos/dubai-night.webm" type="video/webm" />
                     </video>
                     {/* Dark Overlay for Text Readability - 50% Black */}
                     <div className="absolute inset-0 bg-black/50" />
