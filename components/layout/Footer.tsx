@@ -36,7 +36,6 @@ const Footer: React.FC = () => {
                 <a href="tel:+971585057791" className="hover:text-neon-cyan transition-colors">+971 58 505 7791</a>
                 <a href="mailto:sales@shichifukutekx.ae" className="hover:text-neon-cyan transition-colors">sales@shichifukutekx.ae</a>
               </div>
-              <p className="text-white/20 pt-4">© 2025 ShichifukuTekx Inc.</p>
             </div>
           </div>
           <div className="col-span-1">
@@ -61,34 +60,45 @@ const Footer: React.FC = () => {
       </Section>
 
       {/* === MAGNETIC ARROW GRID ANIMATION (SEPARATE SECTION) === */}
-      <div className="w-full border-t border-white/5 bg-black/40 relative z-10 h-48 group">
+      <div className="w-full border-t border-white/5 bg-black/40 relative z-10 h-72 group">
         {/* The Grid Component */}
         <div className="absolute inset-0">
           <FooterArrowGrid isHoveringTop={isHoveringTop} />
         </div>
 
-        {/* Top of Site Button - Circular App Themed */}
+        {/* Top of Site Button - Circular App Themed with Gradient */}
         <button
           onClick={scrollToTop}
           onMouseEnter={() => setIsHoveringTop(true)}
           onMouseLeave={() => setIsHoveringTop(false)}
           className={`absolute -top-6 right-8 md:right-12 z-30 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 border shadow-lg group/btn hover:scale-110 ${isHoveringTop
-            ? 'bg-neon-purple border-neon-purple text-white shadow-[0_0_20px_rgba(180,0,255,0.5)]'
-            : 'bg-obsidian border-white/20 text-white hover:border-neon-cyan hover:text-neon-cyan'
+              ? 'bg-gradient-to-br from-neon-purple to-[#ff00cc] border-neon-purple text-white shadow-[0_0_30px_rgba(180,0,255,0.6)]'
+              : 'bg-gradient-to-br from-obsidian to-[#1a1a2e] border-white/20 text-white hover:border-neon-cyan'
             }`}
           aria-label="Go to top"
         >
           <svg
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
+            strokeWidth="3.5"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="w-5 h-5"
+            className="w-6 h-6 transition-all duration-300"
           >
-            <path d="M12 19V5" />
-            <path d="M5 12l7-7 7 7" />
+            <defs>
+              <linearGradient id="top-btn-gradient-default" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#ffffff" />
+                <stop offset="100%" stopColor="#999999" />
+              </linearGradient>
+              <linearGradient id="top-btn-gradient-active" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#bc13fe" />
+                <stop offset="100%" stopColor="#ff00cc" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M12 19V5 M5 12l7-7 7 7"
+              stroke={`url(#${isHoveringTop ? 'top-btn-gradient-active' : 'top-btn-gradient-default'})`}
+            />
           </svg>
         </button>
 

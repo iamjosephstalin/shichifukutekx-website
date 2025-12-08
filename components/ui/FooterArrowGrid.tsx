@@ -9,7 +9,7 @@ const FooterArrowGrid: React.FC<FooterArrowGridProps> = ({ isHoveringTop = false
     const arrowsRef = useRef<(HTMLDivElement | null)[]>([]);
 
     // Grid configuration
-    const rows = 5; // Fixed number of rows for footer height
+    const rows = 4; // 4 rows
     const [cols, setCols] = useState(20); // Dynamic based on width
 
     // Update columns on resize
@@ -17,8 +17,8 @@ const FooterArrowGrid: React.FC<FooterArrowGridProps> = ({ isHoveringTop = false
         const updateCols = () => {
             if (containerRef.current) {
                 const width = containerRef.current.clientWidth;
-                // Approx 50px per arrow width for density
-                setCols(Math.floor(width / 40));
+                // Approx 60px per arrow width for density + padding adjustment
+                setCols(Math.floor(width / 60));
             }
         };
 
@@ -94,26 +94,37 @@ const FooterArrowGrid: React.FC<FooterArrowGridProps> = ({ isHoveringTop = false
     return (
         <div
             ref={containerRef}
-            className="w-full h-40 overflow-hidden flex flex-wrap justify-center content-center gap-4 py-4 relative z-0 transition-opacity duration-500 opacity-60 hover:opacity-100"
+            className="w-full h-full flex flex-wrap justify-center content-center gap-6 py-8 px-4 md:px-12 relative z-0 transition-opacity duration-500 opacity-60 hover:opacity-100"
         >
             {Array.from({ length: rows * cols }).map((_, i) => (
                 <div
                     key={i}
                     ref={(el) => (arrowsRef.current[i] = el)}
-                    className={`w-6 h-6 flex items-center justify-center transition-all ease-out will-change-transform ${isHoveringTop ? 'duration-500' : 'duration-75'}`}
+                    className={`w-8 h-8 flex items-center justify-center transition-all ease-out will-change-transform ${isHoveringTop ? 'duration-500' : 'duration-75'}`}
                 >
-                    {/* Simple Arrow SVG pointing UP */}
+                    {/* Gradient Arrow SVG */}
                     <svg
                         viewBox="0 0 24 24"
                         fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
+                        strokeWidth="3.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className={`w-full h-full transition-colors duration-300 ${isHoveringTop ? 'text-neon-purple' : 'text-neon-cyan'}`}
+                        className="w-full h-full transition-all duration-300"
                     >
-                        <path d="M12 19V5" />
-                        <path d="M5 12l7-7 7 7" />
+                        <defs>
+                            <linearGradient id={`arrow-gradient-default-${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stopColor="#00f3ff" /> {/* Neon Cyan */}
+                                <stop offset="100%" stopColor="#0066ff" /> {/* Deep Blue */}
+                            </linearGradient>
+                            <linearGradient id={`arrow-gradient-active-${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stopColor="#bc13fe" /> {/* Neon Purple */}
+                                <stop offset="100%" stopColor="#ff00cc" /> {/* Neon Pink */}
+                            </linearGradient>
+                        </defs>
+                        <path
+                            d="M12 19V5 M5 12l7-7 7 7"
+                            stroke={`url(#${isHoveringTop ? `arrow-gradient-active-${i}` : `arrow-gradient-default-${i}`})`}
+                        />
                     </svg>
                 </div>
             ))}

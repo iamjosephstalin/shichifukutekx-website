@@ -340,7 +340,7 @@ const Home: React.FC = () => {
                                 className="flex justify-start"
                             >
                                 <Magnetic>
-                                    <button className="group relative px-8 py-4 md:px-10 md:py-5 rounded-full overflow-hidden transition-all duration-300 shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:shadow-[0_0_40px_rgba(0,240,255,0.5)]">
+                                    <Link to="/contact" className="group relative px-8 py-4 md:px-10 md:py-5 rounded-full overflow-hidden transition-all duration-300 shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:shadow-[0_0_40px_rgba(0,240,255,0.5)] inline-block">
 
                                         {/* Gradient Background */}
                                         <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-neon-cyan via-blue-600 to-neon-purple opacity-90 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -354,7 +354,7 @@ const Home: React.FC = () => {
                                                 <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform duration-300" />
                                             </div>
                                         </div>
-                                    </button>
+                                    </Link>
                                 </Magnetic>
                             </motion.div>
                         </div>
