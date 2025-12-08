@@ -23,7 +23,9 @@ const services = [
         gradient: 'from-emerald-500/40 via-emerald-900/40 to-obsidian', // Darker gradient for text readability
         accent: 'text-emerald-400',
         borderColor: 'group-hover:border-emerald-500/50',
-        image: "/images/Healthcare-Life-Sciences.webp"
+        image: "/images/Healthcare-Life-Sciences.webp",
+        expertise: "Diagnostics",
+        impact: "Precision"
     },
     {
         id: 2,
@@ -34,7 +36,9 @@ const services = [
         gradient: 'from-blue-500/40 via-blue-900/40 to-obsidian',
         accent: 'text-blue-400',
         borderColor: 'group-hover:border-blue-500/50',
-        image: "/images/Financial-Services-main.webp"
+        image: "/images/Financial-Services-main.webp",
+        expertise: "FinTech",
+        impact: "Security"
     },
     {
         id: 3,
@@ -45,7 +49,9 @@ const services = [
         gradient: 'from-neon-purple/40 via-purple-900/40 to-obsidian',
         accent: 'text-neon-purple',
         borderColor: 'group-hover:border-neon-purple/50',
-        image: "/images/Retail-E-commerce.webp"
+        image: "/images/Retail-E-commerce.webp",
+        expertise: "Behavior AI",
+        impact: "Revenue"
     },
     {
         id: 4,
@@ -56,7 +62,9 @@ const services = [
         gradient: 'from-orange-500/40 via-orange-900/40 to-obsidian',
         accent: 'text-orange-400',
         borderColor: 'group-hover:border-orange-500/50',
-        image: "/images/Manufacturing.webp"
+        image: "/images/Manufacturing.webp",
+        expertise: "Industry 4.0",
+        impact: "Uptime"
     },
     {
         id: 5,
@@ -67,7 +75,9 @@ const services = [
         gradient: 'from-indigo-500/40 via-indigo-900/40 to-obsidian',
         accent: 'text-indigo-400',
         borderColor: 'group-hover:border-indigo-500/50',
-        image: "/images/Logistics-Transportation.webp"
+        image: "/images/Logistics-Transportation.webp",
+        expertise: "Route AI",
+        impact: "Efficiency"
     },
     {
         id: 6,
@@ -78,7 +88,9 @@ const services = [
         gradient: 'from-neon-cyan/40 via-cyan-900/40 to-obsidian',
         accent: 'text-neon-cyan',
         borderColor: 'group-hover:border-neon-cyan/50',
-        image: "/images/Technology-SaaS-1.webp"
+        image: "/images/Technology-SaaS-1.webp",
+        expertise: "SaaS AI",
+        impact: "Scale"
     },
 ];
 
@@ -518,12 +530,12 @@ const Home: React.FC = () => {
                                                     <div className="flex items-center gap-6 border-t border-white/20 pt-6">
                                                         <div className="flex flex-col">
                                                             <span className="text-[10px] text-white/70 uppercase tracking-widest font-mono">Expertise</span>
-                                                            <span className="font-mono text-neon-cyan text-sm font-bold shadow-black drop-shadow-sm">Deep Tech</span>
+                                                            <span className="font-mono text-neon-cyan text-sm font-bold shadow-black drop-shadow-sm">{service.expertise}</span>
                                                         </div>
                                                         <div className="w-[1px] h-8 bg-white/20" />
                                                         <div className="flex flex-col">
                                                             <span className="text-[10px] text-white/70 uppercase tracking-widest font-mono">Impact</span>
-                                                            <span className="font-mono text-neon-cyan text-sm font-bold shadow-black drop-shadow-sm">Scalable</span>
+                                                            <span className="font-mono text-neon-cyan text-sm font-bold shadow-black drop-shadow-sm">{service.impact}</span>
                                                         </div>
 
                                                         <button className="ml-auto p-4 rounded-full border border-white/20 hover:bg-white/10 transition-all group/btn bg-black/20 backdrop-blur-sm">
