@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Contact Information Grid */}
-          <div className="grid md:grid-cols-3 gap-8 pb-8 border-b border-white/5">
+          <div className="grid md:grid-cols-3 gap-8 pb-8">
 
             {/* Company Info */}
             <div className="space-y-3">
@@ -114,7 +114,7 @@ const Footer: React.FC = () => {
       </Section>
 
       {/* === MAGNETIC ARROW GRID ANIMATION (SEPARATE SECTION) === */}
-      <div className="w-full border-t border-white/5 bg-black/40 relative z-10 h-72 group">
+      <div className="w-full relative z-10 h-72 group mt-[-1px]">
         {/* The Grid Component */}
         <div className="absolute inset-0">
           <FooterArrowGrid isHoveringTop={isHoveringTop} />
@@ -126,8 +126,8 @@ const Footer: React.FC = () => {
           onMouseEnter={() => setIsHoveringTop(true)}
           onMouseLeave={() => setIsHoveringTop(false)}
           className={`absolute -top-6 right-8 md:right-12 z-30 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 border shadow-lg group/btn hover:scale-110 ${isHoveringTop
-              ? 'bg-gradient-to-br from-neon-purple to-[#ff00cc] border-neon-purple text-white shadow-[0_0_30px_rgba(180,0,255,0.6)]'
-              : 'bg-gradient-to-br from-obsidian to-[#1a1a2e] border-white/20 text-white hover:border-neon-cyan'
+            ? 'bg-gradient-to-br from-neon-purple to-[#ff00cc] border-neon-purple text-white shadow-[0_0_30px_rgba(180,0,255,0.6)]'
+            : 'bg-gradient-to-br from-obsidian to-[#1a1a2e] border-white/20 text-white hover:border-neon-cyan'
             }`}
           aria-label="Go to top"
         >

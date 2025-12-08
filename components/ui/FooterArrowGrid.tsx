@@ -141,9 +141,8 @@ const FooterArrowGrid: React.FC<FooterArrowGridProps> = ({ isHoveringTop = false
                 </div>
             ))}
 
-            {/* Gradient Mask for fading edges */}
+            {/* Gradient Mask for fading edges - Only Bottom now */}
             <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-b from-obsidian via-transparent to-transparent pointer-events-none" />
         </div>
     );
 };
