@@ -64,11 +64,22 @@ const FooterArrowGrid: React.FC<FooterArrowGridProps> = ({ isHoveringTop = false
             });
         };
 
-        const handleMouseMove = (e: MouseEvent) => updateArrows(e.clientX, e.clientY);
+        let rafId: number | null = null;
+        const handleMouseMove = (e: MouseEvent) => {
+            if (rafId) return;
+            rafId = requestAnimationFrame(() => {
+                updateArrows(e.clientX, e.clientY);
+                rafId = null;
+            });
+        };
+
         const handleTouchMove = (e: TouchEvent) => {
-            // We don't prevent default here to allow scrolling, but the arrows will track
             if (e.touches.length > 0) {
-                updateArrows(e.touches[0].clientX, e.touches[0].clientY);
+                if (rafId) return;
+                rafId = requestAnimationFrame(() => {
+                    updateArrows(e.touches[0].clientX, e.touches[0].clientY);
+                    rafId = null;
+                });
             }
         };
 
@@ -85,6 +96,7 @@ const FooterArrowGrid: React.FC<FooterArrowGridProps> = ({ isHoveringTop = false
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('touchmove', handleTouchMove);
+            if (rafId) cancelAnimationFrame(rafId);
         };
     }, [cols, isHoveringTop]);
 

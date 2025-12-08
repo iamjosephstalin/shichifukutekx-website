@@ -625,7 +625,6 @@ const Home: React.FC = () => {
                                     </p>
 
                                     <div className="pt-4 md:pt-8 flex flex-wrap gap-2 md:gap-3">
-                                        {/* @ts-ignore */}
                                         {work.tags && work.tags.map((tag, i) => (
                                             <span key={i} className="px-2 py-1 md:px-3 md:py-1 border border-white/10 rounded-full text-[10px] md:text-xs font-mono text-neon-cyan/80 bg-neon-cyan/5 backdrop-blur-sm">
                                                 {tag}
