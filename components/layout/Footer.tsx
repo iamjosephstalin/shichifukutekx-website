@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Section from '../ui/Section';
 import { Link } from 'react-router-dom';
 import FooterArrowGrid from '../ui/FooterArrowGrid';
+import { Linkedin, Twitter, Instagram, Phone, Mail, MapPin } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const [isHoveringTop, setIsHoveringTop] = useState(false);
@@ -12,50 +13,103 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="bg-obsidian border-t border-white/5 text-white pt-10 z-10 relative font-sans overflow-hidden">
-      <Section className="!py-0 relative z-20 pb-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/5 pt-12">
-          <div className="col-span-2 flex flex-col items-start pr-8 md:pr-0">
-            {/* Logo */}
-            <img
-              src="/images/ShichifukuTekx-White.webp"
-              alt="Shichifukutekx"
-              className="h-12 md:h-16 w-auto object-contain mb-8 opacity-90"
-              onError={(e) => {
-                e.currentTarget.style.display = 'none';
-              }}
-            />
+      <Section className="!py-0 relative z-20 pb-12">
 
-            <div className="text-silver text-sm max-w-xs leading-relaxed font-light space-y-4">
-              <address className="not-italic">
-                <strong className="text-white block mb-1">ShichifukuTekx FZE</strong>
-                Office - C1 - 1F - Sf10837<br />
-                Ajman Free Zone C1 Building<br />
-                United Arab Emirates
-              </address>
-              <div className="flex flex-col gap-1">
-                <a href="tel:+971585057791" className="hover:text-neon-cyan transition-colors">+971 58 505 7791</a>
-                <a href="mailto:sales@shichifukutekx.ae" className="hover:text-neon-cyan transition-colors">sales@shichifukutekx.ae</a>
-              </div>
+        {/* Main Footer Content */}
+        <div className="border-t border-white/5 pt-12">
+
+          {/* Top Row: Logo + Social Icons */}
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-12 gap-8">
+
+            {/* Logo */}
+            <div>
+              <img
+                src="/images/ShichifukuTekx-White.webp"
+                alt="Shichifukutekx"
+                className="h-12 md:h-16 w-auto object-contain opacity-90"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                }}
+              />
+            </div>
+
+            {/* Social Icons - Horizontal */}
+            <div className="flex items-center gap-4">
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative w-11 h-11 rounded-lg bg-obsidian border border-white/10 flex items-center justify-center hover:border-neon-cyan transition-all duration-300 hover:shadow-[0_0_25px_rgba(0,243,255,0.5)] hover:bg-neon-cyan/5"
+              >
+                <Linkedin className="w-5 h-5 text-white/60 group-hover:text-neon-cyan transition-colors" />
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative w-11 h-11 rounded-lg bg-obsidian border border-white/10 flex items-center justify-center hover:border-neon-purple transition-all duration-300 hover:shadow-[0_0_25px_rgba(188,19,254,0.5)] hover:bg-neon-purple/5"
+              >
+                <Twitter className="w-5 h-5 text-white/60 group-hover:text-neon-purple transition-colors" />
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative w-11 h-11 rounded-lg bg-obsidian border border-white/10 flex items-center justify-center hover:border-neon-cyan transition-all duration-300 hover:shadow-[0_0_25px_rgba(0,243,255,0.5)] hover:bg-neon-cyan/5"
+              >
+                <Instagram className="w-5 h-5 text-white/60 group-hover:text-neon-cyan transition-colors" />
+              </a>
             </div>
           </div>
-          <div className="col-span-1">
-            <h4 className="font-bold mb-6 text-neon-cyan font-display uppercase tracking-wider text-sm">Sitemap</h4>
-            <ul className="space-y-3 text-gray-400 text-sm">
-              <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
-              <li><Link to="/about" className="hover:text-white transition-colors">About</Link></li>
-              <li><Link to="/services" className="hover:text-white transition-colors">Services</Link></li>
-              <li><Link to="/work" className="hover:text-white transition-colors">Work</Link></li>
-              <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
-            </ul>
+
+          {/* Contact Information Grid */}
+          <div className="grid md:grid-cols-3 gap-8 pb-8 border-b border-white/5">
+
+            {/* Company Info */}
+            <div className="space-y-3">
+              <h3 className="text-lg font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-purple mb-4">
+                ShichifukuTekx FZE
+              </h3>
+              <div className="flex items-start gap-3">
+                <MapPin className="w-4 h-4 text-neon-cyan mt-1 flex-shrink-0" />
+                <address className="not-italic text-silver/80 text-sm leading-relaxed">
+                  Office - C1 - 1F - Sf10837<br />
+                  Ajman Free Zone C1 Building<br />
+                  United Arab Emirates
+                </address>
+              </div>
+            </div>
+
+            {/* Phone */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 mb-4">
+                <Phone className="w-4 h-4 text-neon-cyan" />
+                <span className="text-xs font-semibold text-neon-cyan uppercase tracking-wider">Phone</span>
+              </div>
+              <a
+                href="tel:+971585057791"
+                className="text-white text-lg font-medium hover:text-neon-cyan transition-colors inline-block"
+              >
+                +971 58 505 7791
+              </a>
+            </div>
+
+            {/* Email */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 mb-4">
+                <Mail className="w-4 h-4 text-neon-cyan" />
+                <span className="text-xs font-semibold text-neon-cyan uppercase tracking-wider">Email</span>
+              </div>
+              <a
+                href="mailto:sales@shichifukutekx.ae"
+                className="text-white text-lg font-medium hover:text-neon-cyan transition-colors inline-block break-all"
+              >
+                sales@shichifukutekx.ae
+              </a>
+            </div>
+
           </div>
-          <div className="col-span-1">
-            <h4 className="font-bold mb-6 text-neon-cyan font-display uppercase tracking-wider text-sm">Socials</h4>
-            <ul className="space-y-3 text-gray-400 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">LinkedIn</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Twitter / X</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Instagram</a></li>
-            </ul>
-          </div>
+
         </div>
       </Section>
 
