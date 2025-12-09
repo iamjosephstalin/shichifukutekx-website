@@ -76,6 +76,7 @@ const TechMarquee: React.FC = () => {
                             duration: 35,
                             repeatType: "loop"
                         }}
+                        style={{ willChange: "transform" }}
                     >
                         {marqueeItems.map((tech, index) => (
                             <div

@@ -185,12 +185,12 @@ const About: React.FC = () => {
             <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
                 {/* Ring 1 - Large Clockwise */}
                 <motion.div
-                    style={{ rotate: rotateClockwise, scale, opacity }}
+                    style={{ rotate: rotateClockwise, scale, opacity, willChange: "transform, opacity" }}
                     className="absolute top-[-10%] right-[-20%] w-[80vw] h-[80vw] md:w-[60vw] md:h-[60vw] border-[1px] border-white/10 rounded-full border-dashed"
                 />
                 {/* Ring 2 - Medium Counter-Clockwise */}
                 <motion.div
-                    style={{ rotate: rotateCounter, scale, opacity }}
+                    style={{ rotate: rotateCounter, scale, opacity, willChange: "transform, opacity" }}
                     className="absolute bottom-[-10%] left-[-10%] w-[60vw] h-[60vw] md:w-[40vw] md:h-[40vw] border-[1px] border-neon-cyan/20 rounded-full border-dashed"
                 />
             </div>
@@ -207,7 +207,7 @@ const About: React.FC = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8 }}
                         >
-                            <motion.div style={{ y: yHero }}>
+                            <motion.div style={{ y: yHero, willChange: "transform" }}>
                                 <span className="text-neon-cyan font-mono text-sm tracking-widest uppercase mb-4 block">About ShichifukuTekx FZE</span>
                                 <h1 className="text-[10vw] lg:text-[6rem] leading-[0.85] font-display font-bold uppercase break-words hyphens-auto">
                                     Intelligent <br /><motion.span
@@ -344,7 +344,7 @@ const About: React.FC = () => {
                         <div className="absolute left-[39px] md:left-[51px] top-0 bottom-0 w-[2px] bg-white/10 origin-top" />
                         {/* Animated Filling Line */}
                         <motion.div
-                            style={{ scaleY }}
+                            style={{ scaleY, willChange: "transform" }}
                             className="absolute left-[39px] md:left-[51px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-neon-cyan via-neon-purple to-transparent origin-top"
                         />
 

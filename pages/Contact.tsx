@@ -20,6 +20,7 @@ const Contact: React.FC = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-7xl md:text-8xl xl:text-9xl font-display font-bold mb-8 text-white uppercase leading-[0.8]"
+              style={{ willChange: "transform, opacity" }}
             >
               Let's <br /> <motion.span
                 className="text-outline"
@@ -74,6 +75,7 @@ const Contact: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="bg-white/5 p-8 md:p-12 rounded-3xl border border-white/10 backdrop-blur-2xl shadow-[0_0_50px_-20px_rgba(0,0,0,0.5)] relative overflow-hidden"
+            style={{ willChange: "transform, opacity" }}
           >
             {/* Form Ambient Light */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-neon-cyan/5 rounded-full blur-[80px] pointer-events-none"></div>

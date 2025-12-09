@@ -123,6 +123,7 @@ const Work: React.FC = () => {
                                 exit={{ opacity: 0, scale: 0.9 }}
                                 transition={{ duration: 0.4 }}
                                 className="group cursor-pointer"
+                                style={{ willChange: "transform, opacity" }}
                             >
                                 <div className="relative overflow-hidden aspect-[4/3] mb-6 rounded-lg">
                                     <div className="absolute inset-0 bg-neon-cyan/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />

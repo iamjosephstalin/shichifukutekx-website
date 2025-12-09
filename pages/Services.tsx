@@ -103,6 +103,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ data, index }) => {
             onHoverEnd={() => setIsHovered(false)}
             onClick={() => setIsHovered(!isHovered)}
             className={`group border-t border-white/10 ${borderColor} relative overflow-hidden cursor-pointer transition-colors duration-300`}
+            style={{ willChange: "transform" }}
         >
             {/* Background Image */}
             <div className="absolute inset-0 z-0 opacity-40 transition-opacity duration-500 group-hover:opacity-60">
@@ -122,6 +123,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ data, index }) => {
                 initial={{ x: '-100%' }}
                 animate={{ x: isHovered ? '0%' : '-100%' }}
                 transition={{ duration: 0.4, ease: "circOut" }}
+                style={{ willChange: "transform" }}
             />
             {/* Dark Overlay for text readability */}
             <div className={`absolute inset-0 bg-obsidian/80 group-hover:bg-obsidian/40 transition-colors duration-500 z-0 pointer-events-none`} />
