@@ -383,6 +383,7 @@ const Home: React.FC = () => {
                         animate={{ x: "-50%" }}
                         transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
                         className="flex gap-16 items-center text-5xl md:text-7xl font-display font-bold select-none w-max"
+                        style={{ willChange: "transform" }}
                     >
                         {/* Set 1 */}
                         <span className="text-white">INTELLIGENCE</span>
@@ -472,6 +473,7 @@ const Home: React.FC = () => {
                                         filter: activeService === service.id ? "grayscale(0%)" : "grayscale(100%)"
                                     }}
                                     transition={{ duration: 0.8, ease: "easeOut" }}
+                                    style={{ willChange: "transform, opacity, filter" }}
                                 >
                                     <img
                                         src={service.image}
@@ -556,7 +558,7 @@ const Home: React.FC = () => {
 
             {/* HORIZONTAL SCROLL CONTAINER */}
             <div ref={triggerRef} className="bg-obsidian border-t border-white/5 relative z-20 h-screen overflow-hidden">
-                <div ref={sliderRef} className="flex h-full w-fit">
+                <div ref={sliderRef} className="flex h-full w-fit" style={{ willChange: "transform" }}>
 
                     {/* PANEL 1: Title Card */}
                     <div className="w-screen h-screen flex-shrink-0 flex items-start pt-24 md:pt-32 lg:items-center lg:pt-0 bg-obsidian border-r border-white/5 relative panel-item">
